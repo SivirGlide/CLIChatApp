@@ -15,7 +15,7 @@ public class ClientHandler implements Runnable{
         this.server = server;
     }
 
-    public void sustainConnection(){
+    private void sustainConnection(){
         try {
             BufferedReader clientInput = new BufferedReader(new InputStreamReader(client.getInputStream()));
             while ((message = clientInput.readLine()) != null) {
