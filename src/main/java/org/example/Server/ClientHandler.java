@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Server;
+
+import org.example.Models.Message;
 
 import java.io.BufferedReader;
 import java.io.IOException;

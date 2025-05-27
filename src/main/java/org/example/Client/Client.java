@@ -1,4 +1,7 @@
-package org.example;
+package org.example.Client;
+
+import org.example.Models.Message;
+import org.example.Models.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,15 +11,13 @@ import java.util.Scanner;
 
 public class Client {
     public void Start() {
+        System.out.println("Attempting to contact server...");
         try (Socket socket = new Socket("localhost", 8080)) {
+            System.out.println("Connection successful");
             String message;
-            String username;
 
-            //username configuration
-            System.out.println("What is your name?: ");
-            Scanner usernameScanner = new Scanner(System.in);
-            username = usernameScanner.nextLine();
-            new Thread(new Message(username,socket)).start();
+            User user = new User();
+            new Thread(new Message(user.getUsername(), socket)).start();
 
             new Thread(() -> {
                 try {
@@ -35,7 +36,8 @@ public class Client {
                 new Thread(new Message(message,socket)).start();
             }
         } catch (IOException e) {
-            e.getStackTrace();
+            System.out.println("Failed to contact server Please check socket connection details are correct and server is on");
+            //here is where i can rerun the program to retry connecting to the server
         }
     }
 
