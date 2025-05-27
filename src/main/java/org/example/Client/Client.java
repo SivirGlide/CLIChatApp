@@ -1,7 +1,6 @@
 package org.example.Client;
 
 import org.example.Models.Message;
-import org.example.Models.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +26,8 @@ public class Client {
                         System.out.println(serverMessage);
                     }
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    System.out.println("Server connection lost, attempting to reconnect...");
+                    //as the message says.
                 }
             }).start();
             while (true){
