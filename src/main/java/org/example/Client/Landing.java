@@ -1,5 +1,7 @@
 package org.example.Client;
 
+import org.example.Client.utils.User;
+
 import java.util.Scanner;
 
 public class Landing {
@@ -35,11 +37,13 @@ public class Landing {
     }
 
     private void chatRoom(){
-
+        System.out.print("Enter the chat name of the chat you would like to join: ");
+        String connectionRequest = new Scanner(System.in).nextLine();
     }
 
     private void directMessage(){
-
+        System.out.print("Enter the username of the user you would like to message: ");
+        String connectionRequest = new Scanner(System.in).nextLine();
     }
 
     private void addFriend(){

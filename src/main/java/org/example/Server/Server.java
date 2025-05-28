@@ -1,24 +1,23 @@
 package org.example.Server;
 
-import org.example.Client.Job;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Server {
     ArrayList<ClientHandler> clientList = new ArrayList<>();
-    ArrayList<Runnable> dispatchQueue = new ArrayList<>();
+    Queue<Runnable> dispatchQueue = new ConcurrentLinkedQueue<>();
     public void Start(final int port) {
         new Thread(() -> connectClients(port)).start();
 
         new Thread(() -> {
             while (true){
                 try{
-                    Runnable jobToExecute = dispatchQueue.get(0);
-                    jobToExecute.run();
-                    dispatchQueue.remove(0);
+                    Runnable jobToExecute = dispatchQueue.remove();
+                    new Thread(jobToExecute).start();
                 } catch (Exception ignored) {
                 }
             }
@@ -29,7 +28,6 @@ public class Server {
         for (ClientHandler client : clientList) {
             if (client != sender) {client.sendMessage(message);}
         }
-        dispatchQueue.add(new Job(this));
     }
 
     private void connectClients(int port){
@@ -46,4 +44,5 @@ public class Server {
             throw new RuntimeException(e);
         }
     }
+
 }

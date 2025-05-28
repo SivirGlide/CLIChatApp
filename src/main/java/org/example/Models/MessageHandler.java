@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Message implements Runnable{
-    private Socket socket;
+public class MessageHandler implements Runnable{
+    private final Socket socket;
     private String message;
 
-    public Message (String message, Socket socket){
+
+    public MessageHandler(Socket socket){
         this.socket = socket;
-        this.message = message;
     }
     @Override
     public void run() {
@@ -21,4 +21,9 @@ public class Message implements Runnable{
             throw new RuntimeException(e);
         }
     }
+
+    public void setMessage(String newMessage){
+        message = newMessage;
+    }
+
 }

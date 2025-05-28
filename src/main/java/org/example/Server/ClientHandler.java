@@ -1,6 +1,6 @@
 package org.example.Server;
 
-import org.example.Models.Message;
+import org.example.Models.MessageHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +46,8 @@ public class ClientHandler implements Runnable{
     }
 
     public void sendMessage(String message){
-        new Thread(new Message(message,client)).start();
+        MessageHandler messageHandler = new MessageHandler(client);
+        messageHandler.setMessage(message);
+        new Thread(messageHandler).start();
     }
 }
