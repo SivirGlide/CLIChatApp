@@ -10,5 +10,6 @@ public interface ServerConnector {
     ///listen for incoming server messages
     void MaintainServerConnection();
 
+    ///get user input
     String UserInput();
 }

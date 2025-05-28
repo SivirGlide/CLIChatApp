@@ -2,6 +2,7 @@ package org.example.Client;
 
 import org.example.Client.interfaces.ServerConnector;
 import org.example.Client.utils.ClientSocket;
+import org.example.Client.utils.ExecutionService;
 import org.example.Client.utils.User;
 import org.example.Models.MessageHandler;
 
@@ -24,13 +25,13 @@ public class ClientManager {
             while (true){
                 String message = socket.UserInput();
                 messageHandler.setMessage(message);
-                new Thread(messageHandler).start();
+                ExecutionService.execute(messageHandler);
             }
     }
 
     public void SendInitalMessage(){
         messageHandler.setMessage(user.getUsername());
-        new Thread(messageHandler).start();
+        ExecutionService.execute(messageHandler);
     }
 
 }
