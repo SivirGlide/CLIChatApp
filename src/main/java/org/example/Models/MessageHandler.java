@@ -1,10 +1,12 @@
 package org.example.Models;
 
+import org.example.Client.interfaces.MessageInterface;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class MessageHandler implements Runnable{
+public class MessageHandler implements MessageInterface {
     private final Socket socket;
     private String message;
 
@@ -22,8 +24,14 @@ public class MessageHandler implements Runnable{
         }
     }
 
+    @Override
     public void setMessage(String newMessage){
         message = newMessage;
+    }
+
+    @Override
+    public void setEvent(String event) {
+
     }
 
 }

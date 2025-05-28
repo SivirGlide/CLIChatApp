@@ -1,8 +1,10 @@
 package org.example.Client.utils;
 
+import org.example.Client.interfaces.UserInterface;
+
 import java.util.Scanner;
 
-public class User {
+public class User implements UserInterface {
 
     String username;
     String password;

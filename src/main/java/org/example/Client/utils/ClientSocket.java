@@ -1,6 +1,6 @@
 package org.example.Client.utils;
 
-import org.example.Client.interfaces.ServerConnector;
+import org.example.Client.interfaces.SocketInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,12 +8,12 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSocket implements ServerConnector {
+public class ClientSocket implements SocketInterface, Runnable {
     Socket socket;
 
     public ClientSocket(){
         this.socket = connect();
-        new Thread(this::MaintainServerConnection).start();
+        ExecutionService.execute(this);
     }
 
     public Socket connect() {
@@ -53,5 +53,10 @@ public class ClientSocket implements ServerConnector {
 
     public Socket getSocket() {
         return socket;
+    }
+
+    @Override
+    public void run() {
+        MaintainServerConnection();
     }
 }
