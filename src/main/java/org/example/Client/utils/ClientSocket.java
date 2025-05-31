@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class ClientSocket implements SocketInterface, Runnable {
     Socket socket;
+    Scanner userInput;
 
     public ClientSocket(){
         this.socket = connect();
